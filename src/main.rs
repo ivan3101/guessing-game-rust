@@ -1,3 +1,4 @@
+use std::cmp::Ordering;
 use std::io;
 use std::ops::{RangeInclusive};
 use rand::{Rng, thread_rng};
@@ -18,7 +19,11 @@ fn main() {
 
     let guess: i32 = guess.trim().parse().expect("You must enter a number!");
 
-    println!("The magic number is {}", magic_number);
+    match guess.cmp(&magic_number) {
+        Ordering::Less => print!("Too low!"),
+        Ordering::Equal => println!("You win!"),
+        Ordering::Greater => println!("Too high!"),
+    }
 }
 
 fn generate_magic_number() -> i32 {
