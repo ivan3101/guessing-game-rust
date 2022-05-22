@@ -9,20 +9,30 @@ fn main() {
     let magic_number = generate_magic_number();
 
     println!("Welcome!");
-    println!("Please enter your guess");
 
-    let mut guess = String::new();
+    let mut game_finished = false;
 
-    io::stdin()
-        .read_line(&mut guess)
-        .expect("Error reading input");
+    while !game_finished {
+        println!("Please enter your guess");
 
-    let guess: i32 = guess.trim().parse().expect("You must enter a number!");
+        let mut guess = String::new();
 
-    match guess.cmp(&magic_number) {
-        Ordering::Less => print!("Too low!"),
-        Ordering::Equal => println!("You win!"),
-        Ordering::Greater => println!("Too high!"),
+        io::stdin()
+            .read_line(&mut guess)
+            .expect("Error reading input");
+
+        let guess: i32 = guess.trim().parse().expect("You must enter a number!");
+
+        match guess.cmp(&magic_number) {
+            Ordering::Less => println!("Too low!"),
+            Ordering::Equal => {
+                println!("You win!");
+                game_finished = true;
+            },
+            Ordering::Greater => println!("Too high!"),
+        }
+
+        println!();
     }
 }
 
