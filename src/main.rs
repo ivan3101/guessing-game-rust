@@ -16,7 +16,7 @@ fn main() {
         .read_line(&mut guess)
         .expect("Error reading input");
 
-    println!("You guessed {}", guess);
+    let guess: i32 = guess.trim().parse().expect("You must enter a number!");
 
     println!("The magic number is {}", magic_number);
 }
